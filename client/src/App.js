@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import ReactMapGL, {Marker, Popup} from 'react-map-gl';
 import { listLogEntries } from './API'
+import LogEntryForm from './LogEntryForm';
 
 const App = () => {
   const [logEntries, setLogEntries] = useState([]);
@@ -118,7 +119,7 @@ const App = () => {
                   anchor="top"
                 >
                   <div className="popup">
-                    <h3>Add your new log entry!</h3>
+                    <LogEntryForm/>
                   </div>
                 </Popup>
                 </>
