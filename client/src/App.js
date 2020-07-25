@@ -119,7 +119,10 @@ const App = () => {
                   anchor="top"
                 >
                   <div className="popup">
-                    <LogEntryForm/>
+                    <LogEntryForm
+                      latitude={addEntryLocation.latitude}
+                      longitude={addEntryLocation.longitude}
+                    />
                   </div>
                 </Popup>
                 </>
