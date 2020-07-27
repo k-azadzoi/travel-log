@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { createLogEntry } from './API'
 
-const LogEntryForm = ({ longitude, latitude }) => {
+const LogEntryForm = ({ longitude, latitude, onClose }) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
       try {
+          setLoading(true)
           data.longitude = longitude;
           data.latitude = latitude;
-          const created = await createLogEntry(data);
-          console.log(created);
+          await createLogEntry(data);
+          onClose();
       } catch (error) {
           console.error(error); 
+          setError(error.message);
+          setLoading(false)
       }
   }
 
   return (
       <>
         <form onSubmit={handleSubmit(onSubmit)} className='entry-form'>
+            {
+                error ? ( <h3 className='error'> {error} </h3> ) : null
+            }
             <label htmlFor='title'>Title</label>
             <input name='title' required ref={register} />
             <label htmlFor='comments'>Comments</label>
@@ -29,7 +37,7 @@ const LogEntryForm = ({ longitude, latitude }) => {
             <input name='image' ref={register}/>
             <label htmlFor='visitDate'>Visit Date</label>
             <input name='visitDate' type='date' required ref={register} />
-            <button type='submit'>Create Visit</button>
+            <button type='submit' disabled={loading}>{loading ? 'Loading...' : 'Create Entry'}</button>
         </form>
       </>
   )
