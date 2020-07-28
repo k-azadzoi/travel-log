@@ -11,7 +11,21 @@ const logs = require('./api/logs');
 
 const app = express();
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.DATABASE_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    });
+    console.log(`Mongo connected on ${conn.connection.host}`);
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+};
+
+connectDB();
 
 app.use(morgan('common'));
 app.use(helmet());

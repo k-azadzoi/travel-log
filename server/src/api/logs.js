@@ -2,6 +2,8 @@
 const { Router } = require('express');
 const LogEntry = require('../models/LogEntry');
 
+const { API_KEY } = process.env;
+
 const router = Router();
 
 router.get('/', async (req, res, next) => {
@@ -15,9 +17,14 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const logEntry = new LogEntry(req.body);
-    const createdEntry = await logEntry.save();
-    res.json(createdEntry);
+    if (req.get('X-API-KEY') !== API_KEY) {
+      res.status(401);
+      throw new Error('Unauthorized');
+    } else {
+      const logEntry = new LogEntry(req.body);
+      const createdEntry = await logEntry.save();
+      res.json(createdEntry);
+    }
   } catch (error) {
     console.log(error.name);
     if (error.name === 'ValidationError') {

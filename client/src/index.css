@@ -13,8 +13,15 @@ body {
 }
 
 .marker {
-  fill: red;
   transform: translate(-50%, -100%);
+}
+
+.marker.red path {
+  fill: #f05305;
+}
+
+.marker.yellow path {
+  fill: #F3B73E;
 }
 
 .popup {
