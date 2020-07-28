@@ -27,6 +27,8 @@ const LogEntryForm = ({ longitude, latitude, onClose }) => {
             {
                 error ? ( <h3 className='error'> {error} </h3> ) : null
             }
+            <label htmlFor='apiKey'>API KEY</label>
+            <input name='apiKey' type='password' required ref={register} />
             <label htmlFor='title'>Title</label>
             <input name='title' required ref={register} />
             <label htmlFor='comments'>Comments</label>

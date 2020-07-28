@@ -6,12 +6,22 @@ export const listLogEntries = async () => {
 }
 
 export const createLogEntry = async (entry) => {
+    const apiKey = entry.apiKey
+    delete entry.apiKey
     const response = await fetch(`${API_URL}/api/logs`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
+                'X-API-KEY': apiKey,
             },
             body: JSON.stringify(entry)
         });
-    return response.json();
+    const json = await response.json()
+    if (response.ok) {
+        return json
+    } else {
+        let errorMessage = `(${response.statusText})`,
+        error = new Error(errorMessage)
+        throw(error)
+    }
 }
