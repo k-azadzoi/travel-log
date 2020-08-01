@@ -12,7 +12,7 @@ const App = () => {
     height: '100vh ',
     latitude: 48.864716,
     longitude: 2.349014, 
-    zoom: 1.80
+    zoom: 1.8
   });
 
   const getEntries = async () => {
