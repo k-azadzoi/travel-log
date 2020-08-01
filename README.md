@@ -26,4 +26,4 @@ $ yarn install
 ## Built With
 
 * [React](https://reactjs.org/) - The web framework used
-* [Node.js/Express] 
+* [Node.js and Express](https://expressjs.com/) 
