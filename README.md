@@ -2,7 +2,9 @@
 
 ## About the project
 
+Track the locations you've previously visited with this travel log tracker. 
 
+An API KEY is needed to add a location to the world map. 
 [LIVE DEMO](https://build-umber.vercel.app/)
 
 ## Future fixes & features
