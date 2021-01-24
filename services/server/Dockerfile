@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY package.json /app/package.json
 
-RUN apk --no-cache add --virtual builds-deps build-base python
+RUN npm install
 
 COPY . /app
 
@@ -19,8 +19,6 @@ WORKDIR /app
 COPY --from=build /app/dist /app
 
 COPY package.json /app/package.json
-
-RUN apk --no-cache add --virtual builds-deps build-base python
 
 RUN npm install --only=prod
 
