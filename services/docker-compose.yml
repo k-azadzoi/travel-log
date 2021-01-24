@@ -1,0 +1,19 @@
+version: "3"
+services:
+  api:
+    build: ./server
+    ports:
+      - "8090:8090"
+    depends_on:
+      - db
+    container_name: travel-server
+  client:
+    build: ./client
+    ports:
+      - "80:80"
+    container_name: travel-client
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: travel-db

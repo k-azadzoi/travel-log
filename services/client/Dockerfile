@@ -1,13 +1,13 @@
 # Building the react portion of the app
 FROM node:current-alpine3.12
 
-WORKDIR /client
+WORKDIR /app
 
-COPY package.json /client/package.json
+COPY package.json /app/package.json
 
 RUN npm install --only=prod
 
-COPY . /client
+COPY . /app
 
 RUN npm run build
 
@@ -16,7 +16,7 @@ RUN npm run build
 
 FROM nginx:1.16.0-alpine
 
-COPY --from=builder /client/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
 EXPOSE 80
 

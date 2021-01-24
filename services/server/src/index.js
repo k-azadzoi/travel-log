@@ -45,7 +45,7 @@ app.use('/api/logs', logs);
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 8090;
 app.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
 });
